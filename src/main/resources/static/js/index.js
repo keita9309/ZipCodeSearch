@@ -53,7 +53,9 @@ $(function() {
                 // 配列の要素数が2件以上の場合、セレクトボックスを表示
                 if (addressArray.length >= 2) {
                     // テキストの中身を初期化
-                    document.getElementById( "address" ).value = "";
+                    // document.getElementById( "address" ).value = "";
+                    // テキストの中身は最初に取得した値をセット
+                    document.getElementById( "address" ).value = addressArray[0];
                     $("#select").show();
                     for (let i = 0; i < addressArray.length; i++) {
                         // selectタグを取得する
