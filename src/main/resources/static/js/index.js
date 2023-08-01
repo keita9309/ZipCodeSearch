@@ -14,15 +14,6 @@ $(function() {
             dataType: 'json',
             async: false,
             success: function(data) {
-                //$("#dispAddress").empty();
-                //let dispAddress = document.getElementById("dispAddress");
-                //let table = document.createElement("table");
-
-                /*
-                table.setAttribute("border", "2");
-                table.setAttribute("cellpadding", "15");
-                table.setAttribute("style", "margin :15px");
-                */
 
                 let recordOfAddress;
                 addressArray = new Array();
@@ -47,32 +38,36 @@ $(function() {
                     // duplicateAddressArray.push((result.address2).toString());
                 });
                 // 住所の一覧(テーブル)
-                // dispAddress.appendChild(table);
                 // selectタグの中身を初期化(削除)
-                $('#citySelect option').remove();
+                $('#td-select-address option').remove();
                 // 配列の要素数が2件以上の場合、セレクトボックスを表示
                 if (addressArray.length >= 2) {
+                    // selectタグを表示
+                    $("#select-address").show();
                     // テキストの中身を初期化
-                    // document.getElementById( "address" ).value = "";
-                    // テキストの中身は最初に取得した値をセット
-                    document.getElementById( "address" ).value = addressArray[0];
                     $("#select").show();
                     for (let i = 0; i < addressArray.length; i++) {
+                        // テキストの中身は最初に取得した値をセット
+                        document.getElementById("td1-address").value = addressArray[0];
                         // selectタグを取得する
-                        let select = document.getElementById("citySelect");
+                        let td_select = document.getElementById("td-select-address");
                         // optionタグを作成する
                         let option = document.createElement("option");
                         // optionタグのテキストに取得した住所を設定する
                         option.text = addressArray[i];
                         // optionタグのvalueに取得した住所を設定する
                         option.value = addressArray[i];
-                        // selectタグの子要素にoptionタグを追加する
-                        select.appendChild(option);
+                        // selectタグの子要素にoptionタグを追加する ※後に記述した方に上書きされる（後の方の一箇所にしか反映されない）
+                        td_select.appendChild(option);
+                        
                     }
                 // 配列の要素数が1件の場合
                 } else {
-                    $("#select").hide();
-                    document.getElementById( "address" ).value = recordOfAddress;
+                    // $("#select").hide();
+                    $("#select-address").hide();
+                    
+                    // document.getElementById( "address" ).value = recordOfAddress;
+                    document.getElementById( "td1-address" ).value = recordOfAddress;
                     
                 }
                 
@@ -81,21 +76,11 @@ $(function() {
     });
 });
 
-/*
-function createRow(header, value) {
-    var tr = document.createElement("tr");
-    var th = document.createElement("th");
-    th.append(header);
-    var td = document.createElement("td");
-    td.append(value);
-    tr.appendChild(th);
-    tr.appendChild(td);
-    return tr;
-}
-*/
-
 // selectタグで選択された住所をテキストに追加
 function setAddress() {
-let select = document.querySelector('[name="cityName"]');
-  document.getElementById( "address" ).value = addressArray[select.selectedIndex];
+let td_select = document.querySelector('[name="td-addrres"]');
+// console.log(addressArray[td_select.selectedIndex]);
+// console.log(addressArray);
+// console.log(td_select.selectedIndex);
+  document.getElementById( "td1-address" ).value = addressArray[td_select.selectedIndex];
 }
